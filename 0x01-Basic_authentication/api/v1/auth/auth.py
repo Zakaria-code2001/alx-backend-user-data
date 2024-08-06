@@ -8,6 +8,7 @@ from typing import List, TypeVar
 import os
 import fnmatch
 
+
 class Auth():
     """
     Authorization Class
@@ -22,8 +23,10 @@ class Auth():
         if excluded_paths is None or not excluded_paths:
             return True
 
+        normalized_path = path if path.endswith('/') else path + '/'
+
         for excluded_path in excluded_paths:
-            if fnmatch.fnmatch(path, excluded_path):
+            if normalized_path.startswith(excluded_path):
                 return False
 
         return True
