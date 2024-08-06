@@ -6,6 +6,7 @@ import base64
 
 from typing import TypeVar
 
+
 class BasicAuth(Auth):
     """
     Basic Authentication Class
@@ -56,8 +57,9 @@ class BasicAuth(Auth):
             return (email, password)
         except ValueError:
             return (None, None)
-    
-    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):
+
+    def user_object_from_credentials(
+            self, user_email: str, user_pwd: str) -> TypeVar('User'):
         """
         user object
         """
@@ -66,11 +68,11 @@ class BasicAuth(Auth):
         if user_pwd is None or not isinstance(user_pwd, str):
             return None
         user = User.search(user_email)
-        
+
         if user is None:
             return None
         password = user.is_valid_password(user_pwd)
         if password:
             return user
-        if password == False:
+        if password is False:
             return None
