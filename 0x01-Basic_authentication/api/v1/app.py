@@ -20,6 +20,9 @@ if auth_type == "auth":
 
 
 def before_request():
+    """
+    Before req
+    """
     excluded_paths = ['/api/v1/status/',
                       '/api/v1/unauthorized/', '/api/v1/forbidden/']
     if auth is None:
