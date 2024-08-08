@@ -2,7 +2,7 @@
 """ Authentication views
 """
 from api.v1.views import app_views
-from flask import abort, jsonify, request
+from flask import jsonify, request, make_response
 from models.user import User
 import os
 
@@ -21,7 +21,7 @@ def login():
     if not password:
         return jsonify({"error": "password missing"}), 400
 
-    user = User.search({'email': email})
+    user = User.search(email)
     if not user:
         return jsonify({"error": "no user found for this email"}), 404
 
@@ -34,6 +34,7 @@ def login():
     session_id = auth.create_session(user.id)
 
     response = jsonify(user.to_json())
-    response.set_cookie(os.getenv('SESSION_NAME'), session_id)
+    session_name = os.getenv('SESSION_NAME', 'SESSION_ID')
+    response.set_cookie(session_name, session_id)
 
     return response, 200
