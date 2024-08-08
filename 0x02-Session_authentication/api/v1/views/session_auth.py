@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+"""Session views
+"""
+
+
 import os
 from typing import Tuple
 
