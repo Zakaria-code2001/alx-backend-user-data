@@ -138,4 +138,3 @@ def _generate_uuid() -> str:
             - UUID generated
     """
     return str(uuid4())
-

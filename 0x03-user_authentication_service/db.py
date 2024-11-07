@@ -86,4 +86,3 @@ class DB:
                 raise ValueError
             setattr(user, attr, val)
         session.commit()
-
